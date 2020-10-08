@@ -9,7 +9,17 @@ class _ChooseLocationState extends State<ChooseLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('Choose Location Screen'),
+      appBar: AppBar(
+        title: Text('Choose a location'),
+      ),
+      body: Center(
+        child: RaisedButton.icon(
+            onPressed: () {
+              Navigator.pushNamed(context, '/loading');
+            },
+            icon: Icon(Icons.cake),
+            label: Text('Clique o cão')),
+      ),
     );
   }
 }
