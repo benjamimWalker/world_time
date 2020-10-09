@@ -7,11 +7,10 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  setupWorldTime() async{
+  setupWorldTime() async {
     WorldTime worldTime = WorldTime(
-      flag: 'germany.png', location: 'Germany', url: 'European/Germany'
-    )
-      await worldTime.getTime();
+        flag: 'germany.png', location: 'Germany', url: 'European/Germany');
+    await worldTime.getTime();
     print(worldTime.time);
   }
 
