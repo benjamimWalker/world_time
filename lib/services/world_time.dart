@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 
 class WorldTime {
   //location name for the UI
@@ -22,14 +23,20 @@ class WorldTime {
   });
 
   Future<void> getTime() async {
-    Response response = await get("http://worldtimeapi.org/api/timezone/$url");
-    var myMap = jsonDecode(response.body);
+    try {
+      Response response =
+          await get("http://worldtimeapi.org/api/timezone/$url");
+      var myMap = jsonDecode(response.body);
 
-    //get properties from data
-    var dateTime = myMap['datetime'];
-    String offset = myMap['utc_offset'].substring(1);
-    DateTime now = DateTime.parse(dateTime);
-    now = now.add(Duration(hours: int.parse(offset)));
-    time = now.toString();
+      //get properties from data
+      var dateTime = myMap['datetime'];
+      String offset = myMap['utc_offset'].substring(1, 3);
+      DateTime now = DateTime.parse(dateTime);
+
+      now = now.add(Duration(hours: int.parse(offset)));
+      time = DateFormat.jm().format(now);
+    } catch (e) {
+      print('deu ruim ' + e.toString());
+    }
   }
 }

@@ -9,9 +9,14 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> {
   setupWorldTime() async {
     WorldTime worldTime = WorldTime(
-        flag: 'germany.png', location: 'Germany', url: 'European/Germany');
+        flag: 'germany.png', location: 'Germany', url: 'America/Montevideo');
     await worldTime.getTime();
-    print(worldTime.time);
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'flag': worldTime.flag,
+      'location': worldTime.location,
+      'url': worldTime.url,
+      'time': worldTime.time
+    });
   }
 
   @override
@@ -24,5 +29,6 @@ class _LoadingState extends State<Loading> {
   @override
   void initState() {
     super.initState();
+    setupWorldTime();
   }
 }
