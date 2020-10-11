@@ -16,6 +16,9 @@ class WorldTime {
   //the location url for api...
   String url;
 
+  // If it will be showed (maybe) the night image nor xor sei lá the day light yagammmy image
+  bool isDayTime;
+
   WorldTime({
     this.location,
     this.flag,
@@ -34,6 +37,8 @@ class WorldTime {
       DateTime now = DateTime.parse(dateTime);
 
       now = now.add(Duration(hours: int.parse(offset)));
+
+      isDayTime = now.hour > 6 && now.hour < 19;
       time = DateFormat.jm().format(now);
     } catch (e) {
       print('deu ruim ' + e.toString());
